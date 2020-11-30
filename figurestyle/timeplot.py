@@ -43,7 +43,7 @@ def cnt_yaxis(*ylist):
         elif isinstance(yn, str):
             #str data is legend
             ylable[cnt] = yn      
-        elif len(yn) == 2:
+        elif len(yn) == 2 :
             #word length equal 2 is yaxis limitation
             ylim[cnt] =yn
         else:
@@ -115,8 +115,14 @@ def set_plot_data(Time,Data,legend,ylim,axes):
     """
     #plot Data
     for i in Data.keys():
-        axes[i+1].plot(Time,Data[i])
-
+        temp_data = Data[i]
+        if len(temp_data) == 1 \
+            or not isinstance(temp_data,list):
+            axes[i+1].plot(Time,Data[i])
+        else:
+            for j,x in enumerate(temp_data):
+                axes[i+1].plot(Time,x)
+                
     #set legend
     for i in legend.keys():
         axes[i+1].set_ylabel(legend[i])
@@ -155,15 +161,15 @@ def time_plot(Time,*args):
 if __name__ == "__main__":
 
     #closefigure
-    #plt.close('all')
+    plt.close('all')
     # How to Use this function
     Times = np.arange(0,1,0.001)
     Data = np.sin(2*np.pi*Times)
     
     #plot example
-    time_plot(Times,Data,[0,2.8],'hoge1',Data*2,Data*3,[0,1], \
-              Data*4,'hoge4')
+    time_plot(Times,[Data,Data*5,Data*10],[-10,10],'hoge1',Data*2,Data*3,[0,1], \
+              Data,'hoge4')
     
-    time_plot(Times,Data,[0,2.8],'hoge1',Data*2)
+    #time_plot(Times,Data,[-5,5],'hoge1',Data*2)
    
     
