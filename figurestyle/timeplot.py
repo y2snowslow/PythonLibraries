@@ -7,6 +7,8 @@ Created on Sun Nov 29 19:34:57 2020
 
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+
 
 
 def __cnt_yaxis(*ylist):
@@ -117,23 +119,32 @@ def __set_plot_data(Time,Data,legend,ylim,axes):
     None.Windos is renewable
 
     """
+    
     #plot Data
     for i in Data.keys():
         temp_data = Data[i]
         if len(temp_data) == 1 \
             or not isinstance(temp_data,list):
-            axes[i+1].plot(Time,Data[i])
+                #to Transposition Countermeasures 
+                if np.shape(Time)[0] == np.shape(Data[i])[0]:
+                    axes[i+1].plot(Time,Data[i])
+                else:
+                    axes[i+1].plot(Time,np.transpose(Data[i]))
         else:
             for j,x in enumerate(temp_data):
                 axes[i+1].plot(Time,x)
                 
     #set legend
     for i in legend.keys():
-        axes[i+1].set_ylabel(legend[i],fontname="MS Gothic")
+        axes[i+1].set_ylabel(legend[i],fontname="Meiryo")
 
     #set legend
     for i in ylim.keys():
         axes[i+1].set_ylim(ylim[i])
+        
+    #set xrange
+    axes[1].set_xlim([np.min(Time), np.max(Time)])
+    
         
     return
         
@@ -166,13 +177,19 @@ if __name__ == "__main__":
 
     #closefigure
     plt.close('all')
-    # How to Use this function
-    Times = np.arange(0,1,0.001)
-    Data = np.sin(2*np.pi*Times)
+    # Read Data Example
+    #Times = np.arange(0,1,0.001)
+    #Data = np.sin(2*np.pi*Times)
     
     #plot example
-    time_plot(Times,[Data,Data*5,Data*10],[-10,10],'日本語',[Data*2,Data*0.5],Data*3,[0,1], \
-              Data,'hoge4')
+    #time_plot(Times,[Data,Data*5,Data*10],[-10,10],'日本語',[Data*2,Data*0.5],Data*3,[0,1], \
+    #          Data,'hoge4')
+        
+    # Read Data Example2 
+    A =pd.read_csv('PandasData.csv')
+    time_plot(A.Time,[A.Data,A.Data2],[-2,5],'データ1,2',\
+              [A.Data3],'test')
+     
     
     #time_plot(Times,Data,[-5,5],'hoge1',Data*2)
    
