@@ -7,7 +7,7 @@ Created on Sun Nov 29 19:34:57 2020
 
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
+#import pandas as pd
 
 
 
@@ -178,16 +178,16 @@ if __name__ == "__main__":
     #closefigure
     plt.close('all')
     # Read Data Example
-    #Times = np.arange(0,1,0.001)
-    #Data = np.sin(2*np.pi*Times)
+    Times = np.arange(0,1,0.001)
+    Data = np.sin(2*np.pi*Times)
     
     #plot example
-    #time_plot(Times,[Data,Data*5,Data*10],[-10,10],'日本語',[Data*2,Data*0.5],Data*3,[0,1], \
-    #          Data,'hoge4')
+    time_plot(Times,[Data,Data*5,Data*10],[-10,10],'日本語',[Data*2,Data*0.5],Data*3,[0,1], \
+              Data,'hoge4')
         
     # Read Data Example2 
-    A =pd.read_csv('PandasData.csv')
-    time_plot(A.Time,[A.Data,A.Data2],[-2,5],'データ1,2',\
+    #A =pd.read_csv('PandasData.csv')
+    #time_plot(A.Time,[A.Data,A.Data2],[-2,5],'データ1,2',\
               [A.Data3],'test')
      
     
