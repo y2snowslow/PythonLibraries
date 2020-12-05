@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def cnt_yaxis(*ylist):
+def __cnt_yaxis(*ylist):
     """
     cnt ydata size and  sorting the data and ylabel and ranges 
 
@@ -55,7 +55,7 @@ def cnt_yaxis(*ylist):
     
     
     
-def make_figure_window(Windows_number):
+def __make_figure_window(Windows_number):
     """
     make multi-matplotlib figure window
 
@@ -71,7 +71,10 @@ def make_figure_window(Windows_number):
         if return axes = 0, maybe windows_number is mistake.
 
     """
-    plt.figure()
+    plt.figure(figsize=(12.8, 10))
+    
+    #Default Fontsize Setting
+    plt.rcParams['font.size'] = 18
     
     #Error Check
     if Windows_number <= 0:
@@ -94,7 +97,7 @@ def make_figure_window(Windows_number):
     return axes
 
 
-def set_plot_data(Time,Data,legend,ylim,axes):
+def __set_plot_data(Time,Data,legend,ylim,axes):
     """
     Set Plot Data for figure Windows
     ----------
@@ -152,9 +155,9 @@ def time_plot(Time,*args):
     None.
 
     """
-    Data,legend,ylim = cnt_yaxis(args)
-    axes = make_figure_window(len(Data.keys()))
-    set_plot_data(Time,Data,legend,ylim,axes)
+    Data,legend,ylim = __cnt_yaxis(args)
+    axes = __make_figure_window(len(Data.keys()))
+    __set_plot_data(Time,Data,legend,ylim,axes)
         
     return
     
